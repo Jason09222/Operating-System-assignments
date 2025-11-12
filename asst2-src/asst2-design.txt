@@ -1,0 +1,51 @@
+What significant data structures have you added and what function do they perform?
+
+First, We used a struct to represent File descriptor table, File descriptor table contains a 128 fixed size array to make connection with the open file table. 
+
+File Descriptor Table
+    - Contains pointers to open file table entry
+
+Second, We used another struct to represent an open file table, an open file table containing a 128 fixed size array points to each open file entry. 
+
+Open File Table
+    - List of file entry
+
+Third one also used struct, we used struct to present an open file entry, an open  file entry contains a vnode pointer, reference counter, flag, offset and a locker. 
+The purpose of creating a unique locker for each entry is to prevent multiple pointer points to the same open file entry and prevent the update of that open file entry at the same time.
+
+Open_File_entry
+    - Contains an pointer to an vnode
+    - Reference counter
+    - flag
+    - Lock
+    - offset
+
+
+What are any significant issues surrounding managing the data structures and state do they contain?
+
+Firstly, since the open file table is globally, we must ensure that it is initial at the very beginning of the system to be able to be accessed by any other processes.
+Secondly is the memory allocated issue, we reduce this by setting the maximum open file numbers to 128 to ensure the data will not be allocated out of the memory space, 
+and the memory leek problem also exists and we solve this by calling free each time.
+Thirdly is the concurrency issue, we use the lock to provide synchronisation primitives and solve the race condition problem. 
+And we should manage the offset number in the corresponding open_file_entry each time after read, write or lseek, 
+and we should update the reference counter each time after calling close or dup2 to ensure the data consistency. 
+Furthermore, race conditions also raise with these issues, when a file is updated from two different processes.
+
+
+What data structures are per-process and what structures are shared between processes?
+
+The open file table should be shared between processes, and we achieve this by initializing the open file table in main.c. 
+File descriptor table are per-process, each process contains a file descriptor table and is initialized at the runprogram.c.
+
+
+What is the main issues related to transferring data to and from applications?
+
+The main issues related to transferring data to and from from userland and kernel are data accuracy,
+ we used copyin(), copyinstr(), join32to64() and split64to32() to ensure the data accuracy.
+
+
+If fork() was implemented, what concurrency issues would be introduced to your implementation?
+
+If fork() was implemented, there’s may have the race condition on the single open file entry, 
+like the offset or reference counter number may be changed in the same time and cause the problem, 
+but there should not be any concurrency issues since we have a locker for every open file entry to prevent issues like race conditions.
