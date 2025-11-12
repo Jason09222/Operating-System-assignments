@@ -58,7 +58,7 @@ sys161 kernel "1a;q"
 sys161 kernel "1b;q"
 ```
 
-> ⚠️ Do not change the provided kernel menu option strings.
+>  Do not change the provided kernel menu option strings.
 
 ---
 
@@ -77,7 +77,7 @@ Understanding OS/161’s **thread subsystem** and **wait channels** will help wi
 
 ## 6. Assignment Parts
 
-### 🧩 Part 1: Concurrent Counter (6 marks)
+###  Part 1: Concurrent Counter (6 marks)
 Implement a **thread-safe counter** in `kern/asst1/counter.c` and `counter.h`.
 
 Functions to implement:
@@ -99,7 +99,7 @@ The final count value was 10000 (expected 10000)
 
 ---
 
-### 🧩 Part 2: Simple Deadlock (4 marks)
+### Part 2: Simple Deadlock (4 marks)
 Modify `kern/asst1/twolocks.c` to apply **resource ordering** to prevent deadlock between threads using two locks (`lock_a`, `lock_b`).
 
 Constraints:
@@ -123,7 +123,7 @@ Locking frenzy finished
 
 ---
 
-### 🧩 Part 3: Bounded Buffer Producer/Consumer (8 marks)
+### Part 3: Bounded Buffer Producer/Consumer (8 marks)
 Synchronise the **producer-consumer** circular buffer using locks and condition variables.
 
 Implement in:
@@ -145,7 +145,7 @@ Expected behaviour: all producers and consumers finish cleanly with correct data
 
 ---
 
-### 🧩 Part 4: The Soup Kitchen (12 marks)
+### Part 4: The Soup Kitchen (12 marks)
 Simulate a **soup kitchen** with customer and cook threads.
 
 Functions to implement in `kitchen.c`:
@@ -184,7 +184,7 @@ Submit via the **CSE give** system as a git bundle:
 The system will perform a **test build and simple execution check**.  
 You can resubmit until the deadline, and only the latest successful submission counts.
 
-> ⚠️ If your submission does not compile, you may receive **zero marks**.
+> If your submission does not compile, you may receive **zero marks**.
 
 ---
 
